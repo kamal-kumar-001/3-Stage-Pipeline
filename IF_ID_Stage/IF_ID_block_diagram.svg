@@ -1,0 +1,626 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1750 1200" width="100%" height="100%" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Grid pattern -->
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+    </pattern>
+    <!-- Arrow markers -->
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <!-- Drop shadows -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Grid -->
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <!-- HEADER BANNER -->
+  <rect x="30" y="20" width="1690" height="50" rx="8" fill="#1e293b" />
+  <text x="50" y="52" fill="#ffffff" font-size="20" font-weight="700" letter-spacing="0.5">IF_ID STAGE BLOCK DIAGRAM (IF_ID.v)</text>
+  <text x="1690" y="52" fill="#94a3b8" font-size="13" font-weight="500" text-anchor="end">RISC-V 3-Stage Pipeline • Hardware Architecture</text>
+
+  <!-- LEGEND -->
+  <g transform="translate(1280, 80)">
+    <rect x="0" y="0" width="440" height="35" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <line x1="15" y1="17" x2="35" y2="17" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+    <text x="42" y="21" font-size="11" font-weight="600" fill="#334155">Data Bus (32/5/3-bit)</text>
+    <line x1="160" y1="17" x2="180" y2="17" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="187" y="21" font-size="11" font-weight="600" fill="#334155">Control / Select Line</text>
+    <line x1="280" y1="17" x2="290" y2="17" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-purple)"/>
+    <text x="297" y="21" font-size="11" font-weight="600" fill="#334155">Clock / Reset / Stall</text>
+    <line x1="390" y1="17" x2="410" y2="17" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+    <text x="417" y="21" font-size="11" font-weight="600" fill="#334155">Exception</text>
+  </g>
+
+  <!-- ==================== LEFT INPUT PORTS ==================== -->
+  <g id="input-ports">
+    <!-- Top Global Signals Box -->
+    <rect x="30" y="80" width="220" height="110" rx="8" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="40" y="102" font-size="13" font-weight="700" fill="#6b21a8">GLOBAL INPUTS</text>
+    
+    <circle cx="45" cy="122" r="4" fill="#7c3aed"/>
+    <text x="55" y="126" font-size="12" font-weight="600" fill="#4c1d95">clk</text>
+    
+    <circle cx="45" cy="147" r="4" fill="#7c3aed"/>
+    <text x="55" y="151" font-size="12" font-weight="600" fill="#4c1d95">reset <tspan font-size="10" fill="#6b21a8">(active low)</tspan></text>
+    
+    <circle cx="45" cy="172" r="4" fill="#7c3aed"/>
+    <text x="55" y="176" font-size="12" font-weight="600" fill="#4c1d95">stall / stall_read_i</text>
+
+    <!-- General Input Ports Box -->
+    <rect x="30" y="205" width="220" height="960" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="30" y="205" width="220" height="30" rx="8" fill="#e2e8f0"/>
+    <text x="40" y="225" font-size="13" font-weight="700" fill="#334155">MODULE INPUT INTERFACE</text>
+
+    <!-- Signal list inside input box -->
+    <!-- Instruction Mem -->
+    <text x="40" y="260" font-size="11" font-weight="700" fill="#0284c7">INST MEM INTERFACE</text>
+    <text x="45" y="280" font-size="12" fill="#1e293b">inst_mem_is_valid</text>
+    <text x="45" y="305" font-size="12" font-weight="600" fill="#1e293b">inst_mem_read_data <tspan fill="#64748b">[31:0]</tspan></text>
+
+    <!-- Pipeline Signals -->
+    <line x1="40" y1="320" x2="240" y2="320" stroke="#cbd5e1" stroke-dasharray="3,3"/>
+    <text x="40" y="340" font-size="11" font-weight="700" fill="#0284c7">FETCH / PIPE INPUTS</text>
+    <text x="45" y="365" font-size="12" font-weight="600" fill="#1e293b">inst_fetch_pc <tspan fill="#64748b">[31:0]</tspan></text>
+    <text x="45" y="440" font-size="12" font-weight="600" fill="#1e293b">instruction_i <tspan fill="#64748b">[31:0]</tspan></text>
+
+    <!-- Memory Offset -->
+    <line x1="40" y1="460" x2="240" y2="460" stroke="#cbd5e1" stroke-dasharray="3,3"/>
+    <text x="40" y="480" font-size="11" font-weight="700" fill="#0284c7">MISALIGNMENT CHECK</text>
+    <text x="45" y="505" font-size="12" font-weight="600" fill="#1e293b">inst_mem_offset <tspan fill="#64748b">[1:0]</tspan></text>
+
+    <!-- WB Signals (Passed in) -->
+    <line x1="40" y1="525" x2="240" y2="525" stroke="#cbd5e1" stroke-dasharray="3,3"/>
+    <text x="40" y="545" font-size="11" font-weight="700" fill="#64748b">WB STAGE SIGNALS (Pass-thru)</text>
+    <text x="45" y="570" font-size="11" fill="#475569">wb_stall</text>
+    <text x="45" y="595" font-size="11" fill="#475569">wb_alu_to_reg</text>
+    <text x="45" y="620" font-size="11" fill="#475569">wb_mem_to_reg</text>
+    <text x="45" y="645" font-size="11" fill="#475569">wb_dest_reg_sel [4:0]</text>
+    <text x="45" y="670" font-size="11" fill="#475569">wb_result [31:0]</text>
+    <text x="45" y="695" font-size="11" fill="#475569">wb_read_data [31:0]</text>
+  </g>
+
+  <!-- ==================== STAGE 1: INSTRUCTION NOP MUX ==================== -->
+  <g id="nop-mux">
+    <!-- MUX Trapezoid -->
+    <polygon points="300,420 340,435 340,495 300,510" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" filter="url(#shadow)"/>
+    <text x="315" y="470" font-size="11" font-weight="700" fill="#0369a1" text-anchor="middle">MUX</text>
+    <text x="308" y="440" font-size="10" font-weight="600" fill="#0369a1">0</text>
+    <text x="308" y="495" font-size="10" font-weight="600" fill="#0369a1">1</text>
+    
+    <!-- MUX inputs -->
+    <line x1="250" y1="440" x2="300" y2="440" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+    <text x="275" y="434" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/32</text>
+    
+    <rect x="252" y="482" width="45" height="18" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+    <text x="274" y="494" font-size="9" font-weight="700" fill="#475569" text-anchor="middle">NOP</text>
+    <line x1="297" y1="491" x2="300" y2="491" stroke="#1e293b" stroke-width="1.5"/>
+
+    <path d="M 190,176 L 190,195 L 320,195 L 320,428" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-purple)"/>
+    <text x="250" y="190" font-size="10" font-weight="700" fill="#7c3aed">stall_read_i (SEL)</text>
+
+    <!-- MUX Output: instruction_o wire -->
+    <line x1="340" y1="465" x2="380" y2="465" stroke="#1e293b" stroke-width="2.5"/>
+    <circle cx="380" cy="465" r="4" fill="#1e293b"/>
+    <text x="360" y="458" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/32</text>
+
+    <!-- Wire to instruction_o Output Port -->
+    <path d="M 380,465 L 380,1140 L 1480,1140" fill="none" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+    <text x="900" y="1132" font-size="11" font-weight="700" fill="#1e293b">instruction_o [31:0] = stall_read_i ? NOP : instruction_i</text>
+  </g>
+
+  <!-- ==================== EXCEPTION LOGIC (USER SCHEMATIC) ==================== -->
+  <g id="exception-logic">
+    <rect x="340" y="70" width="460" height="150" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="350" y="88" font-size="12" font-weight="700" fill="#991b1b">EXCEPTION LOGIC (ID STAGE)</text>
+
+    <rect x="355" y="130" width="70" height="35" rx="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="390" y="146" font-size="12" font-weight="800" fill="#0369a1" text-anchor="middle">≠</text>
+    <text x="390" y="159" font-size="9" font-weight="700" fill="#0369a1" text-anchor="middle">2'b00</text>
+    
+    <path d="M 250,505 L 320,505 L 320,147 L 355,147" fill="none" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    
+    <line x1="425" y1="147" x2="460" y2="147" stroke="#dc2626" stroke-width="1.5"/>
+
+    <path d="M 460,100 C 460,100 468,110 460,130 C 480,130 490,120 495,115 C 490,110 480,100 460,100 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="472" y="118" font-size="9" font-weight="700" fill="#92400e">OR</text>
+
+    <!-- Top Input to OR Gate: illegal_inst from Immediate Generator -->
+    <path d="M 1080,680 L 1100,680 L 1100,165 L 450,165 L 450,108 L 461,108" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <text x="800" y="180" font-size="9" font-weight="700" fill="#dc2626">illegal_inst</text>
+
+    <path d="M 425,147 L 445,147 L 445,122 L 461,122" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+
+    <line x1="495" y1="115" x2="550" y2="115" stroke="#dc2626" stroke-width="1.5"/>
+
+    <polygon points="390,185 405,192 390,200" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+    <circle cx="408" cy="192" r="3" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+    <path d="M 150,147 L 150,192 L 390,192" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="411" y1="192" x2="565" y2="192" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <polygon points="550,100 580,110 580,165 550,175" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="565" y="132" font-size="9" font-weight="800" fill="#15803d" text-anchor="middle">2 : 1</text>
+    <text x="565" y="144" font-size="9" font-weight="800" fill="#15803d" text-anchor="middle">MUX</text>
+
+    <text x="542" y="118" font-size="9" font-weight="700" fill="#15803d">1</text>
+    <text x="542" y="158" font-size="9" font-weight="700" fill="#15803d">0</text>
+    <line x1="520" y1="155" x2="550" y2="155" stroke="#16a34a" stroke-width="1.5"/>
+    <rect x="500" y="147" width="20" height="15" rx="2" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+    <text x="510" y="158" font-size="8" font-weight="700" fill="#475569" text-anchor="middle">1'b0</text>
+
+    <path d="M 565,192 L 565,168" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-purple)"/>
+
+    <line x1="580" y1="137" x2="620" y2="137" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+    <rect x="620" y="110" width="70" height="70" rx="4" fill="#f3e8ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="655" y="132" font-size="10" font-weight="800" fill="#6b21a8" text-anchor="middle">D FF</text>
+    <text x="630" y="142" font-size="9" font-weight="700" fill="#4c1d95">D</text>
+    <text x="678" y="142" font-size="9" font-weight="700" fill="#4c1d95">Q</text>
+    <polygon points="645,180 655,170 665,180" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+
+    <path d="M 120,122 L 120,55 L 655,55 L 655,180" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="690" y1="137" x2="1480" y2="137" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+  </g>
+
+  <!-- ==================== IMMEDIATE GENERATOR (EXACT USER NOTEBOOK SCHEMATIC) ==================== -->
+  <g id="immediate-generator">
+    <!-- Big Immediate Generator Box -->
+    <rect x="420" y="240" width="670" height="490" rx="10" fill="#faf5ff" stroke="#a855f7" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="420" y="240" width="670" height="32" rx="10" fill="#f3e8ff"/>
+    <text x="755" y="261" font-size="13" font-weight="800" fill="#7e22ce" text-anchor="middle">IMMEDIATE GENERATOR (ID STAGE)</text>
+    <text x="1070" y="261" font-size="10" font-weight="600" fill="#6b21a8" text-anchor="end">Exact Hardware Implementation</text>
+
+    <!-- Parallel Format Extractors Box on Left of Imm Gen -->
+    <!-- Input wire instruction_i[31:0] -->
+    <line x1="380" y1="465" x2="440" y2="465" stroke="#1e293b" stroke-width="2.5"/>
+    <circle cx="440" cy="465" r="4" fill="#1e293b"/>
+    <text x="400" y="458" font-size="9" font-weight="700" fill="#1e293b">instruction_i[31:0]</text>
+
+    <!-- 1. JALR Format -->
+    <g transform="translate(440, 290)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#6b21a8">JALR:</text>
+      <text x="48" y="16" font-size="9" font-family="monospace" fill="#1e293b">{{20{inst[31]}}, inst[31:20]}</text>
+      <line x1="280" y1="12" x2="480" y2="12" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="15" font-size="9" font-weight="700" fill="#475569">1100111</text>
+    </g>
+
+    <!-- 2. BRANCH Format -->
+    <g transform="translate(440, 325)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#6b21a8">BRANCH:</text>
+      <text x="58" y="16" font-size="8.5" font-family="monospace" fill="#1e293b">{{19{inst[31]}}, inst[31], inst[7]..}</text>
+      <line x1="280" y1="12" x2="480" y2="40" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="43" font-size="9" font-weight="700" fill="#475569">1100011</text>
+    </g>
+
+    <!-- 3. LOAD Format -->
+    <g transform="translate(440, 360)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#6b21a8">LOAD:</text>
+      <text x="48" y="16" font-size="9" font-family="monospace" fill="#1e293b">{{20{inst[31]}}, inst[31:20]}</text>
+      <line x1="280" y1="12" x2="480" y2="65" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="68" font-size="9" font-weight="700" fill="#475569">0000011</text>
+    </g>
+
+    <!-- 4. STORE Format -->
+    <g transform="translate(440, 395)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#6b21a8">STORE:</text>
+      <text x="55" y="16" font-size="8.5" font-family="monospace" fill="#1e293b">{{20{inst[31]}}, inst[31:25], inst[11:7]}</text>
+      <line x1="280" y1="12" x2="480" y2="90" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="93" font-size="9" font-weight="700" fill="#475569">0100011</text>
+    </g>
+
+    <!-- 5. ARITHI Format with 2:1 MUX & FUNC3 Comparators -->
+    <g transform="translate(440, 430)">
+      <rect x="0" y="0" width="370" height="110" rx="6" fill="#fdf4ff" stroke="#e879f9" stroke-width="1.5"/>
+      <text x="8" y="16" font-size="10" font-weight="800" fill="#a21caf">ARITHI FORMAT &amp; SHIFT MUX</text>
+
+      <!-- Input 1: {27{1'b0}}, inst[24:20] -->
+      <rect x="10" y="25" width="200" height="20" rx="3" fill="#ffffff" stroke="#d8b4fe" stroke-width="1"/>
+      <text x="15" y="38" font-size="8.5" font-family="monospace" fill="#1e293b">{27{1'b0}}, inst[24:20]</text>
+      <line x1="210" y1="35" x2="250" y2="35" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="242" y="31" font-size="8" font-weight="700" fill="#9333ea">1</text>
+
+      <!-- Input 0: {{20{inst[31]}}, inst[31:20]} -->
+      <rect x="10" y="52" width="200" height="20" rx="3" fill="#ffffff" stroke="#d8b4fe" stroke-width="1"/>
+      <text x="15" y="65" font-size="8.5" font-family="monospace" fill="#1e293b">{{20{inst[31]}}, inst[31:20]}</text>
+      <line x1="210" y1="62" x2="250" y2="62" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="242" y="58" font-size="8" font-weight="700" fill="#9333ea">0</text>
+
+      <!-- ARITHI 2:1 MUX -->
+      <polygon points="250,25 275,32 275,68 250,75" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="262" y="52" font-size="8" font-weight="800" fill="#7e22ce" text-anchor="middle">2:1</text>
+
+      <!-- FUNC3 Comparators (SLL / SR) and OR Gate -->
+      <rect x="10" y="80" width="55" height="22" rx="3" fill="#ffffff" stroke="#0284c7" stroke-width="1"/>
+      <text x="37" y="94" font-size="8" font-weight="700" fill="#0369a1" text-anchor="middle">== SLL</text>
+
+      <rect x="70" y="80" width="55" height="22" rx="3" fill="#ffffff" stroke="#0284c7" stroke-width="1"/>
+      <text x="97" y="94" font-size="8" font-weight="700" fill="#0369a1" text-anchor="middle">== SR</text>
+
+      <!-- OR Gate for FUNC3 check -->
+      <path d="M 135,80 C 135,80 141,85 135,102 C 148,102 155,95 160,91 C 155,87 148,80 135,80 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+      <line x1="65" y1="91" x2="136" y2="85" stroke="#0284c7" stroke-width="1"/>
+      <line x1="125" y1="91" x2="136" y2="95" stroke="#0284c7" stroke-width="1"/>
+
+      <!-- Wire OR output to MUX select -->
+      <path d="M 160,91 L 262,91 L 262,72" fill="none" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+      <text x="180" y="87" font-size="8" font-weight="700" fill="#0284c7">inst[`FUNC3] == SLL || SR</text>
+
+      <!-- ARITHI MUX output wire to Opcode MUX -->
+      <line x1="275" y1="50" x2="480" y2="85" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="118" font-size="9" font-weight="700" fill="#475569">0010011</text>
+    </g>
+
+    <!-- 6. ARITHR Format (32'h0) -->
+    <g transform="translate(440, 550)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#6b21a8">ARITHR:</text>
+      <text x="60" y="16" font-size="9" font-family="monospace" fill="#1e293b">32'h0000_0000</text>
+      <line x1="280" y1="12" x2="480" y2="15" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="142" font-size="9" font-weight="700" fill="#475569">0110011</text>
+    </g>
+
+    <!-- 7. LUI Format -->
+    <g transform="translate(440, 585)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#6b21a8">LUI:</text>
+      <text x="40" y="16" font-size="9" font-family="monospace" fill="#1e293b">{inst[31:12], 12{1'b0}}</text>
+      <line x1="280" y1="12" x2="480" y2="-10" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="166" font-size="9" font-weight="700" fill="#475569">0110111</text>
+    </g>
+
+    <!-- 8. JAL Format -->
+    <g transform="translate(440, 620)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#6b21a8">JAL:</text>
+      <text x="40" y="16" font-size="8.5" font-family="monospace" fill="#1e293b">{{11{inst[31]}}, inst[19:12]..}</text>
+      <line x1="280" y1="12" x2="480" y2="-30" stroke="#1e293b" stroke-width="1.5"/>
+      <text x="490" y="190" font-size="9" font-weight="700" fill="#475569">1101111</text>
+    </g>
+
+    <!-- 9. Default / Rest Format -->
+    <g transform="translate(440, 655)">
+      <rect x="0" y="0" width="280" height="24" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+      <text x="8" y="16" font-size="10" font-weight="700" fill="#dc2626">rest (DEFAULT):</text>
+      <text x="110" y="16" font-size="9" font-weight="700" fill="#dc2626">illegal_inst = 1'b1</text>
+      <line x1="280" y1="12" x2="480" y2="-50" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="490" y="212" font-size="9" font-weight="700" fill="#dc2626">rest</text>
+    </g>
+
+    <!-- MAIN LARGE 8-WAY OPCODE MUX TRAPEZOID -->
+    <polygon points="980,285 1040,305 1040,685 980,705" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" filter="url(#shadow)"/>
+    <text x="1010" y="495" font-size="14" font-weight="800" fill="#6b21a8" text-anchor="middle" transform="rotate(-90 1010 495)">OPCODE MUX</text>
+
+    <!-- Select Line instruction_i[`OPCODE] at bottom of MUX -->
+    <path d="M 380,465 L 400,465 L 400,725 L 1010,725 L 1010,695" fill="none" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <rect x="650" y="713" width="160" height="20" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+    <text x="730" y="727" font-size="10" font-weight="800" fill="#0369a1" text-anchor="middle">instruction_i[`OPCODE]</text>
+
+    <!-- Output of MUX: immediate [31:0] -->
+    <line x1="1040" y1="495" x2="1120" y2="495" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+    <text x="1065" y="488" font-size="10" font-weight="700" fill="#1e293b">immediate [31:0]</text>
+    <text x="1090" y="510" font-size="10" font-weight="600" fill="#64748b">/32</text>
+
+    <!-- Output of Default: illegal_inst -->
+    <line x1="1040" y1="680" x2="1120" y2="680" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+    <text x="1055" y="673" font-size="10" font-weight="700" fill="#dc2626">illegal_inst</text>
+  </g>
+
+  <!-- ==================== CONTROL LOGIC & DECODER GATES ==================== -->
+  <g id="control-decoder">
+    <rect x="420" y="760" width="670" height="370" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="420" y="760" width="670" height="28" rx="8" fill="#e0f2fe"/>
+    <text x="755" y="779" font-size="12" font-weight="700" fill="#0369a1" text-anchor="middle">CONTROL SIGNAL DECODER BLOCK (ID STAGE)</text>
+    <text x="1070" y="779" font-size="10" font-weight="600" fill="#0284c7" text-anchor="end">Generates Control Signals for EX Stage</text>
+
+    <!-- Wire from OPCODE -->
+    <path d="M 400,725 L 400,800 L 440,800" fill="none" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="410" y="795" font-size="10" font-weight="700" fill="#0284c7">OPCODE[6:0]</text>
+
+    <!-- Control Gates & Lines -->
+    <!-- 1. immediate_sel_i: (OPCODE == JALR) || (OPCODE == LOAD) || (OPCODE == ARITHI) -->
+    <rect x="460" y="800" width="220" height="30" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1"/>
+    <text x="570" y="819" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">JALR || LOAD || ARITHI</text>
+    <line x1="680" y1="815" x2="1120" y2="815" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="700" y="810" font-size="10" font-weight="700" fill="#0284c7">immediate_sel_i</text>
+
+    <!-- 2. alu_i: (OPCODE == ARITHI) || (OPCODE == ARITHR) -->
+    <rect x="460" y="840" width="220" height="26" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1"/>
+    <text x="570" y="857" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">ARITHI || ARITHR</text>
+    <line x1="680" y1="853" x2="1120" y2="853" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="700" y="848" font-size="10" font-weight="700" fill="#0284c7">alu_i</text>
+
+    <!-- 3. lui_i -->
+    <line x1="440" y1="885" x2="1120" y2="885" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="460" y="880" font-size="10" font-weight="700" fill="#0284c7">lui_i (OPCODE == LUI)</text>
+
+    <!-- 4. jal_i -->
+    <line x1="440" y1="915" x2="1120" y2="915" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="460" y="910" font-size="10" font-weight="700" fill="#0284c7">jal_i (OPCODE == JAL)</text>
+
+    <!-- 5. jalr_i -->
+    <line x1="440" y1="945" x2="1120" y2="945" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="460" y="940" font-size="10" font-weight="700" fill="#0284c7">jalr_i (OPCODE == JALR)</text>
+
+    <!-- 6. branch_i -->
+    <line x1="440" y1="975" x2="1120" y2="975" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="460" y="970" font-size="10" font-weight="700" fill="#0284c7">branch_i (OPCODE == BRANCH)</text>
+
+    <!-- 7. mem_write_i -->
+    <line x1="440" y1="1005" x2="1120" y2="1005" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="460" y="1000" font-size="10" font-weight="700" fill="#0284c7">mem_write_i (OPCODE == STORE)</text>
+
+    <!-- 8. mem_to_reg_i -->
+    <line x1="440" y1="1035" x2="1120" y2="1035" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="460" y="1030" font-size="10" font-weight="700" fill="#0284c7">mem_to_reg_i (OPCODE == LOAD)</text>
+
+    <!-- 9. arithsubtype_i: SUBTYPE && !(ARITHI && ADD) -->
+    <rect x="460" y="1060" width="240" height="30" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1"/>
+    <text x="580" y="1079" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">SUBTYPE &amp;&amp; !(ARITHI &amp;&amp; ADD)</text>
+    <line x1="700" y1="1075" x2="1120" y2="1075" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="720" y="1070" font-size="10" font-weight="700" fill="#0284c7">arithsubtype_i</text>
+  </g>
+
+  <!-- Wire for PC (inst_fetch_pc straight to id_ex_reg) -->
+  <path d="M 250,365 L 1120,365" fill="none" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+  <text x="300" y="358" font-size="10" font-weight="700" fill="#1e293b">inst_fetch_pc [31:0] (pc_i)</text>
+  <text x="750" y="358" font-size="10" font-weight="600" fill="#64748b">/32</text>
+
+  <!-- Bit Field Slicer connections to id_ex_reg -->
+  <!-- RS1 [19:15] -->
+  <path d="M 380,465 L 400,465 L 400,535 L 1120,535" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+  <text x="800" y="530" font-size="10" font-weight="700" fill="#1e293b">RS1 [19:15] (src1_sel_i)</text>
+  <text x="950" y="530" font-size="9" font-weight="600" fill="#64748b">/5</text>
+
+  <!-- RS2 [24:20] -->
+  <path d="M 380,465 L 400,465 L 400,575 L 1120,575" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+  <text x="800" y="570" font-size="10" font-weight="700" fill="#1e293b">RS2 [24:20] (src2_sel_i)</text>
+  <text x="950" y="570" font-size="9" font-weight="600" fill="#64748b">/5</text>
+
+  <!-- RD [11:7] -->
+  <path d="M 380,465 L 400,465 L 400,615 L 1120,615" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+  <text x="800" y="610" font-size="10" font-weight="700" fill="#1e293b">RD [11:7] (dest_reg_sel_i)</text>
+  <text x="950" y="610" font-size="9" font-weight="600" fill="#64748b">/5</text>
+
+  <!-- FUNC3 [14:12] -->
+  <path d="M 380,465 L 400,465 L 400,650 L 1120,650" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+  <text x="800" y="645" font-size="10" font-weight="700" fill="#1e293b">FUNC3 [14:12] (alu_op_i)</text>
+  <text x="950" y="645" font-size="9" font-weight="600" fill="#64748b">/3</text>
+
+
+  <!-- ==================== MAIN PIPELINE REGISTER BLOCK (id_ex_reg) ==================== -->
+  <g id="id-ex-register">
+    <rect x="1120" y="180" width="240" height="950" rx="10" fill="#ffffff" stroke="#1e293b" stroke-width="3" filter="url(#shadow)"/>
+    <rect x="1120" y="180" width="240" height="45" rx="10" fill="#1e293b"/>
+    <text x="1240" y="202" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">id_ex_reg</text>
+    <text x="1240" y="218" font-size="11" font-weight="600" fill="#cbd5e1" text-anchor="middle">ID → EX PIPELINE REGISTER</text>
+
+    <!-- Clock / Reset / Stall Control Pin Inputs at Top of Register -->
+    <!-- Clock -->
+    <polygon points="1160,225 1168,235 1176,225" fill="#7c3aed"/>
+    <text x="1168" y="248" font-size="10" font-weight="700" fill="#7c3aed" text-anchor="middle">clk</text>
+    <path d="M 120,122 L 120,55 L 1168,55 L 1168,225" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Reset -->
+    <polygon points="1240,225 1248,235 1256,225" fill="#7c3aed"/>
+    <text x="1248" y="248" font-size="10" font-weight="700" fill="#7c3aed" text-anchor="middle">reset_n</text>
+    <path d="M 150,147 L 150,45 L 1248,45 L 1248,225" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Stall -->
+    <polygon points="1310,225 1318,235 1326,225" fill="#7c3aed"/>
+    <text x="1318" y="248" font-size="10" font-weight="700" fill="#7c3aed" text-anchor="middle">stall_n</text>
+    <path d="M 190,195 L 1318,195 L 1318,225" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Signal Port Rows inside Register -->
+    <!-- Row 1: immediate -->
+    <line x1="1120" y1="495" x2="1360" y2="495" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="495" r="4" fill="#1e293b"/>
+    <circle cx="1360" cy="495" r="4" fill="#1e293b"/>
+    <text x="1130" y="490" font-size="10" font-weight="600" fill="#334155">immediate_i [32]</text>
+    <text x="1350" y="490" font-size="10" font-weight="600" fill="#334155" text-anchor="end">execute_immediate_o [32]</text>
+
+    <!-- Row 2: illegal_inst -->
+    <line x1="1120" y1="680" x2="1360" y2="680" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="680" r="4" fill="#dc2626"/>
+    <circle cx="1360" cy="680" r="4" fill="#dc2626"/>
+    <text x="1130" y="675" font-size="10" font-weight="600" fill="#b91c1c">illegal_inst_i</text>
+    <text x="1350" y="675" font-size="10" font-weight="600" fill="#b91c1c" text-anchor="end">illegal_inst_o</text>
+
+    <!-- Row 3: pc -->
+    <line x1="1120" y1="365" x2="1360" y2="365" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="365" r="4" fill="#1e293b"/>
+    <circle cx="1360" cy="365" r="4" fill="#1e293b"/>
+    <text x="1130" y="360" font-size="10" font-weight="600" fill="#334155">pc_i [32]</text>
+    <text x="1350" y="360" font-size="10" font-weight="600" fill="#334155" text-anchor="end">pc_o [32]</text>
+
+    <!-- Row 4: src1_sel -->
+    <line x1="1120" y1="535" x2="1360" y2="535" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="535" r="4" fill="#1e293b"/>
+    <circle cx="1360" cy="535" r="4" fill="#1e293b"/>
+    <text x="1130" y="530" font-size="10" font-weight="600" fill="#334155">src1_sel_i [5]</text>
+    <text x="1350" y="530" font-size="10" font-weight="600" fill="#334155" text-anchor="end">src1_sel_o [5]</text>
+
+    <!-- Row 5: src2_sel -->
+    <line x1="1120" y1="575" x2="1360" y2="575" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="575" r="4" fill="#1e293b"/>
+    <circle cx="1360" cy="575" r="4" fill="#1e293b"/>
+    <text x="1130" y="570" font-size="10" font-weight="600" fill="#334155">src2_sel_i [5]</text>
+    <text x="1350" y="570" font-size="10" font-weight="600" fill="#334155" text-anchor="end">src2_sel_o [5]</text>
+
+    <!-- Row 6: dest_reg_sel -->
+    <line x1="1120" y1="615" x2="1360" y2="615" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="615" r="4" fill="#1e293b"/>
+    <circle cx="1360" cy="615" r="4" fill="#1e293b"/>
+    <text x="1130" y="610" font-size="10" font-weight="600" fill="#334155">dest_reg_sel_i [5]</text>
+    <text x="1350" y="610" font-size="10" font-weight="600" fill="#334155" text-anchor="end">dest_reg_sel_o [5]</text>
+
+    <!-- Row 7: alu_op -->
+    <line x1="1120" y1="650" x2="1360" y2="650" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="650" r="4" fill="#1e293b"/>
+    <circle cx="1360" cy="650" r="4" fill="#1e293b"/>
+    <text x="1130" y="645" font-size="10" font-weight="600" fill="#334155">alu_op_i [3]</text>
+    <text x="1350" y="645" font-size="10" font-weight="600" fill="#334155" text-anchor="end">alu_op_o [3]</text>
+
+    <!-- Row 8: immediate_sel -->
+    <line x1="1120" y1="815" x2="1360" y2="815" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="815" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="815" r="4" fill="#0284c7"/>
+    <text x="1130" y="810" font-size="10" font-weight="600" fill="#0369a1">immediate_sel_i</text>
+    <text x="1350" y="810" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">immediate_sel_o</text>
+
+    <!-- Row 9: alu_i -->
+    <line x1="1120" y1="853" x2="1360" y2="853" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="853" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="853" r="4" fill="#0284c7"/>
+    <text x="1130" y="848" font-size="10" font-weight="600" fill="#0369a1">alu_i</text>
+    <text x="1350" y="848" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">alu_o</text>
+
+    <!-- Row 10: lui_i -->
+    <line x1="1120" y1="885" x2="1360" y2="885" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="885" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="885" r="4" fill="#0284c7"/>
+    <text x="1130" y="880" font-size="10" font-weight="600" fill="#0369a1">lui_i</text>
+    <text x="1350" y="880" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">lui_o</text>
+
+    <!-- Row 11: jal_i -->
+    <line x1="1120" y1="915" x2="1360" y2="915" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="915" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="915" r="4" fill="#0284c7"/>
+    <text x="1130" y="910" font-size="10" font-weight="600" fill="#0369a1">jal_i</text>
+    <text x="1350" y="910" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">jal_o</text>
+
+    <!-- Row 12: jalr_i -->
+    <line x1="1120" y1="945" x2="1360" y2="945" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="945" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="945" r="4" fill="#0284c7"/>
+    <text x="1130" y="940" font-size="10" font-weight="600" fill="#0369a1">jalr_i</text>
+    <text x="1350" y="940" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">jalr_o</text>
+
+    <!-- Row 13: branch_i -->
+    <line x1="1120" y1="975" x2="1360" y2="975" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="975" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="975" r="4" fill="#0284c7"/>
+    <text x="1130" y="970" font-size="10" font-weight="600" fill="#0369a1">branch_i</text>
+    <text x="1350" y="970" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">branch_o</text>
+
+    <!-- Row 14: mem_write_i -->
+    <line x1="1120" y1="1005" x2="1360" y2="1005" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="1005" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="1005" r="4" fill="#0284c7"/>
+    <text x="1130" y="1000" font-size="10" font-weight="600" fill="#0369a1">mem_write_i</text>
+    <text x="1350" y="1000" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">mem_write_o</text>
+
+    <!-- Row 15: mem_to_reg_i -->
+    <line x1="1120" y1="1035" x2="1360" y2="1035" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="1035" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="1035" r="4" fill="#0284c7"/>
+    <text x="1130" y="1030" font-size="10" font-weight="600" fill="#0369a1">mem_to_reg_i</text>
+    <text x="1350" y="1030" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">mem_to_reg_o</text>
+
+    <!-- Row 16: arithsubtype_i -->
+    <line x1="1120" y1="1075" x2="1360" y2="1075" stroke="#f1f5f9" stroke-width="1"/>
+    <circle cx="1120" cy="1075" r="4" fill="#0284c7"/>
+    <circle cx="1360" cy="1075" r="4" fill="#0284c7"/>
+    <text x="1130" y="1070" font-size="10" font-weight="600" fill="#0369a1">arithsubtype_i</text>
+    <text x="1350" y="1070" font-size="10" font-weight="600" fill="#0369a1" text-anchor="end">arithsubtype_o</text>
+  </g>
+
+  <!-- ==================== RIGHT MODULE OUTPUT PORTS ==================== -->
+  <g id="output-ports">
+    <rect x="1480" y="80" width="240" height="1085" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="1480" y="80" width="240" height="30" rx="8" fill="#e2e8f0"/>
+    <text x="1600" y="100" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">MODULE OUTPUT STAGE</text>
+
+    <!-- Output Signals Routing & Labels -->
+    <!-- 1. exception -->
+    <text x="1495" y="139" font-size="12" font-weight="700" fill="#dc2626">exception</text>
+
+    <!-- 2. pc_w -->
+    <line x1="1360" y1="365" x2="1480" y2="365" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+    <text x="1410" y="358" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/32</text>
+    <text x="1495" y="369" font-size="12" font-weight="700" fill="#1e293b">pc_w <tspan fill="#64748b">[31:0]</tspan></text>
+
+    <!-- 3. execute_immediate_w -->
+    <line x1="1360" y1="495" x2="1480" y2="495" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+    <text x="1410" y="488" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/32</text>
+    <text x="1495" y="499" font-size="12" font-weight="700" fill="#1e293b">execute_immediate_w <tspan fill="#64748b">[31:0]</tspan></text>
+
+    <!-- 4. src1_select_w -->
+    <line x1="1360" y1="535" x2="1480" y2="535" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+    <text x="1410" y="528" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/5</text>
+    <text x="1495" y="539" font-size="12" font-weight="700" fill="#1e293b">src1_select_w <tspan fill="#64748b">[4:0]</tspan></text>
+
+    <!-- 5. src2_select_w -->
+    <line x1="1360" y1="575" x2="1480" y2="575" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+    <text x="1410" y="568" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/5</text>
+    <text x="1495" y="579" font-size="12" font-weight="700" fill="#1e293b">src2_select_w <tspan fill="#64748b">[4:0]</tspan></text>
+
+    <!-- 6. dest_reg_sel_w -->
+    <line x1="1360" y1="615" x2="1480" y2="615" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+    <text x="1410" y="608" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/5</text>
+    <text x="1495" y="619" font-size="12" font-weight="700" fill="#1e293b">dest_reg_sel_w <tspan fill="#64748b">[4:0]</tspan></text>
+
+    <!-- 7. alu_operation_w -->
+    <line x1="1360" y1="650" x2="1480" y2="650" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+    <text x="1410" y="643" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">/3</text>
+    <text x="1495" y="654" font-size="12" font-weight="700" fill="#1e293b">alu_operation_w <tspan fill="#64748b">[2:0]</tspan></text>
+
+    <!-- 8. illegal_inst_w -->
+    <line x1="1360" y1="680" x2="1480" y2="680" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+    <text x="1495" y="684" font-size="12" font-weight="700" fill="#dc2626">illegal_inst_w</text>
+
+    <!-- 9. immediate_sel_w -->
+    <line x1="1360" y1="815" x2="1480" y2="815" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="819" font-size="12" font-weight="700" fill="#0284c7">immediate_sel_w</text>
+
+    <!-- 10. alu_w -->
+    <line x1="1360" y1="853" x2="1480" y2="853" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="857" font-size="12" font-weight="700" fill="#0284c7">alu_w</text>
+
+    <!-- 11. lui_w -->
+    <line x1="1360" y1="885" x2="1480" y2="885" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="889" font-size="12" font-weight="700" fill="#0284c7">lui_w</text>
+
+    <!-- 12. jal_w -->
+    <line x1="1360" y1="915" x2="1480" y2="915" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="919" font-size="12" font-weight="700" fill="#0284c7">jal_w</text>
+
+    <!-- 13. jalr_w -->
+    <line x1="1360" y1="945" x2="1480" y2="945" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="949" font-size="12" font-weight="700" fill="#0284c7">jalr_w</text>
+
+    <!-- 14. branch_w -->
+    <line x1="1360" y1="975" x2="1480" y2="975" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="979" font-size="12" font-weight="700" fill="#0284c7">branch_w</text>
+
+    <!-- 15. mem_write_w -->
+    <line x1="1360" y1="1005" x2="1480" y2="1005" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="1009" font-size="12" font-weight="700" fill="#0284c7">mem_write_w</text>
+
+    <!-- 16. mem_to_reg_w -->
+    <line x1="1360" y1="1035" x2="1480" y2="1035" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="1039" font-size="12" font-weight="700" fill="#0284c7">mem_to_reg_w</text>
+
+    <!-- 17. arithsubtype_w -->
+    <line x1="1360" y1="1075" x2="1480" y2="1075" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="1495" y="1079" font-size="12" font-weight="700" fill="#0284c7">arithsubtype_w</text>
+
+    <!-- 18. instruction_o -->
+    <text x="1495" y="1144" font-size="12" font-weight="700" fill="#1e293b">instruction_o <tspan fill="#64748b">[31:0]</tspan></text>
+  </g>
+</svg>

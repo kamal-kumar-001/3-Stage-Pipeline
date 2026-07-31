@@ -1,0 +1,7 @@
+# Ignore Project folder and submission docx files
+Project/
+*.docx
+.DS_Store
+*.vcd
+*.out
+scratch/

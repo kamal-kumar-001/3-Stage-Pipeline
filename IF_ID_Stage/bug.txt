@@ -1,0 +1,4 @@
+IF_ID.v:70: made exception clear back to 0 when there is no illegal instruction or misaligned fetch. Before this, once it became 1, it stayed high forever.
+tb_IF_ID.v:178: added inst_mem_read_data = instruction_i; so the standalone testbench actually drives the IF-stage instruction input.
+top_fpga.v:34: fixed the stimulus ROM counter from addr == 17 to addr == 16; the memory is only [0:16], so 17 was out of bounds.
+top_fpga.v:71: tied inst_mem_read_data to instruction_i and tied unused WB control inputs to 0, avoiding undriven regs.
