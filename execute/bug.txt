@@ -1,0 +1,7 @@
+execute.v:69: completed TODO-EX-1 for alu_operand2 operand multiplexer. Before this, second operand selection was unassigned.
+execute.v:94: completed TODO-EX-2 for ex_result_subu 33-bit unsigned subtraction. Before this, unsigned comparison wide subtraction was unassigned.
+execute.v:119: completed TODO-EX-3 for next_pc calculation (JAL, JALR, BNE, BGE, BGEU) and branch_taken resolution under branch_stall hazard suppression.
+execute.v:183: completed TODO-EX-4 for ALU operations (SLL, SLTU, XOR, SRA/SRL shift masking [4:0], OR, AND) and ex_result multiplexing.
+execute.v:280: completed TODO-EX-5 for ex_mem_wb_reg pipeline register non-reset state updates on clk edge when stall_n is low.
+tb_execute.v:139: completed TODO-TB-1 by opening file handles for input trace reading (if_id_output.txt) and execute stage output logging (execute_output.txt).
+top_fpga_ex.v:29: fixed stimulus ROM address overflow check from addr == 19 to addr == 16 (memory size [0:16]) and unpacked missing DUT input signals.
