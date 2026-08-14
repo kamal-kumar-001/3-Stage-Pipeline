@@ -1,0 +1,5 @@
+memory.v:47: completed TODO-DMEM-1 by declaring dmem memory array reg [31:0] dmem [0:1023] (4 KB word-addressable data memory).
+memory.v:54: completed TODO-DMEM-2 by initializing dmem memory array from dmem.hex file in initial block.
+memory.v:70: completed TODO-DMEM-3 for byte-wise write strobes wstrb[2] and wstrb[3] and RAW byte-level forwarding for bytes 1, 2, and 3.
+tb_mem.v:16: completed TODO-TB-MEM-1 and TODO-TB-MEM-2 by instantiating uut_imem (instr_mem) and uut_dmem (data_mem) with clock and bus connections.
+top_module.v:32: fixed counter register variable mismatch in clock_divider (changed count_reg to counter) and completed 1Hz clock divider and IMEM instantiation.
