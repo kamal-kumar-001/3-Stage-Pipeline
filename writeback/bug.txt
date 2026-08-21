@@ -1,0 +1,6 @@
+wb.v:118: completed TODO-WB for Store Byte (SB) byte masks (2'b01 -> 4'b0010, 2'b10 -> 4'b0100, 2'b11 -> 4'b1000).
+wb.v:126: completed TODO-WB for Store Halfword (SH) byte mask (write_address_i[1] ? 4'b1100 : 4'b0011) and Store Word (SW) byte mask (4'b1111).
+wb.v:156: completed TODO-WB for Load Byte (LB) 2'b11 byte selection with 24-bit sign extension ({{24{dmem_read_data_i[31]}}, dmem_read_data_i[31:24]}).
+tb_wb.v:103: completed TODO in testbench by adding error display and $finish on missing input trace file execute_output.txt.
+tb_wb.v:156: completed TODO in testbench by closing input/output file handles ($fclose) and calling $finish.
+top_fpga.v:25: fixed stimulus ROM loop address reset from TODO to addr <= 0 and increment to addr <= addr + 1.
