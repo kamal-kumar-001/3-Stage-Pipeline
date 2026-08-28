@@ -1,0 +1,6 @@
+pipeline.v:175: completed TODO for Register File Forwarding for src1_select and src2_select (return 0 if x0, forward wb_read_data/wb_result if matching WB destination, or read regs array).
+pipeline.v:198: completed TODO for Register File Writeback on positive clock edge for reset initialization (x1-x31 cleared to 0) and WB stage register writes.
+pipeline.v:233: completed TODO for execute module instantiation by connecting ID/EX and EX->WB signals.
+pipeline.v:302: completed TODO for wb_stage module instantiation by connecting WB inputs and outputs.
+tb_pipeline.v:57: completed TODO for DUT pipeline instantiation ports (inst_mem_address, dmem_read_ready, dmem_read_address, dmem_write_ready, dmem_write_address, dmem_write_data, dmem_write_byte).
+top_fpga.v:71: completed TODO for FPGA top module pipeline and memory module instantiations.
